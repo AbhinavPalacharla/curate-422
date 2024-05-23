@@ -2,9 +2,20 @@
 
 import { useRouter } from "next/router";
 import { Button } from "@/components/shared";
+import { Dropdown } from "../shared/Dropdown";
 
 const Navbar: React.FC<{}> = () => {
   const router = useRouter();
+
+  const sampleCollectionsData: Array<{
+    id: number;
+    name: string;
+    icon: string;
+  }> = [
+    { id: 1, name: "Collection 1", icon: "" },
+    { id: 2, name: "Collection 2", icon: "" },
+    { id: 3, name: "Collection 3", icon: "" },
+  ];
 
   return (
     <div className="flex flex-row items-center">
@@ -15,12 +26,28 @@ const Navbar: React.FC<{}> = () => {
           <>
             <h1 className="text-[#646464] font-light text-md italic">/</h1>
 
-            <button className="ring-0 outline-none flex flex-row w-36">
-              <span className="text-[#969696] hover:text-white underline underline-offset-2 text-sm font-light block truncate">
-                {/* {store?.collection?.name} */}
-                Testing
-              </span>
-            </button>
+            <Dropdown
+              items={sampleCollectionsData}
+              action={{
+                name: "Manage Collections",
+                onClick: () => {
+                  // router.push("/collections");
+                  // router.events.on("routeChangeStart", () => {
+                  //   setLoading(true);
+                  // });
+                  // router.events.on("routeChangeComplete", () => {
+                  //   setLoading(false);
+                  // });
+                },
+              }}
+            >
+              <button className="ring-0 outline-none flex flex-row w-36">
+                <span className="text-[#969696] hover:text-white underline underline-offset-2 text-sm font-light block truncate">
+                  {/* {store?.collection?.name} */}
+                  Testing
+                </span>
+              </button>
+            </Dropdown>
           </>
         </div>
         <Button

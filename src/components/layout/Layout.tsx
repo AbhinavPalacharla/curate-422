@@ -22,11 +22,11 @@ const Layout: React.FC<{
       <meta
         name="theme-color"
         content={
-          "#000000, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
+          "#000000, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
         }
         style={{ backgroundColor: "#000000" }}
       />
-      <div className="bg-black h-full relative">
+      <div className="bg-black h-screen relative">
         {navbar && (
           <div className="fixed top-0 left-0 right-0">
             <Navbar />
