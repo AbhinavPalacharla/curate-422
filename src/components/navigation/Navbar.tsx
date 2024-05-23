@@ -31,13 +31,13 @@ const Navbar: React.FC<{}> = () => {
               action={{
                 name: "Manage Collections",
                 onClick: () => {
-                  // router.push("/collections");
-                  // router.events.on("routeChangeStart", () => {
-                  //   setLoading(true);
-                  // });
-                  // router.events.on("routeChangeComplete", () => {
-                  //   setLoading(false);
-                  // });
+                  router.push("/collections");
+                  router.events.on("routeChangeStart", () => {
+                    // setLoading(true);
+                  });
+                  router.events.on("routeChangeComplete", () => {
+                    // setLoading(false);
+                  });
                 },
               }}
             >
