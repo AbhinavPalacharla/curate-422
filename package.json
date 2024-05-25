@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "schema-generate": "prisma generate",
+    "schema-push": "prisma db push",
+    "init-db": "ts-node src/scripts/initDB.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.4.2",
@@ -18,9 +21,11 @@
     "http-status-codes": "^2.3.0",
     "iconoir-react": "^6.0.0",
     "next": "13.5.6",
+    "prisma": "^5.14.0",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.51.5",
+    "ts-node": "^10.9.2",
     "zod": "^3.23.8"
   },
   "devDependencies": {
