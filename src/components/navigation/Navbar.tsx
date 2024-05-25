@@ -8,6 +8,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import type { IconName } from "@/utils";
 import { getIconByName } from "@/utils";
+import { useCollectionStore } from "@/stores";
 
 const Navbar: React.FC<{}> = () => {
   const router = useRouter();
@@ -20,11 +21,13 @@ const Navbar: React.FC<{}> = () => {
       const data = (await axios.get("/api/collection/get.collections"))
         .data as Array<Omit<Collection, "icon"> & { icon?: IconName }>;
 
-      console.log(data);
+      // console.log(data);
 
       return data;
     },
   });
+
+  const store = useCollectionStore();
 
   // const data: Array<{
   //   id: number;
@@ -49,19 +52,23 @@ const Navbar: React.FC<{}> = () => {
               <Dropdown
                 // items={sampleCollectionsData}
                 // items={data}
-                items={data?.map((collection) => ({
-                  name: collection.name,
-                  icon: collection.icon
-                    ? getIconByName({ name: collection.icon as IconName })
-                    : "",
-                  // onClick: () => {
-                  //   store.setCollection({
-                  //     id: collection.id,
-                  //     name: collection.name,
-                  //     icon: collection.icon,
-                  //   });
-                  // },
-                }))}
+                items={data?.map(
+                  (
+                    collection: Omit<Collection, "icon"> & { icon?: IconName }
+                  ) => ({
+                    name: collection.name,
+                    icon: collection.icon
+                      ? getIconByName({ name: collection.icon })
+                      : "",
+                    onClick: () => {
+                      store.setCollection({
+                        id: collection.id,
+                        name: collection.name,
+                        icon: collection.icon,
+                      });
+                    },
+                  })
+                )}
                 action={{
                   name: "Manage Collections",
                   onClick: () => {
@@ -77,8 +84,8 @@ const Navbar: React.FC<{}> = () => {
               >
                 <button className="ring-0 outline-none flex flex-row w-36">
                   <span className="text-[#969696] hover:text-white underline underline-offset-2 text-sm font-light block truncate">
-                    {/* {store?.collection?.name} */}
-                    Testing
+                    {store?.collection?.name}
+                    {/* Testing */}
                   </span>
                 </button>
               </Dropdown>
