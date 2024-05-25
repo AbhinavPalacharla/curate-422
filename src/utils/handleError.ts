@@ -1,6 +1,7 @@
 import type { NextApiResponse } from "next";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
+// import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 const handleError = (error: any, res: NextApiResponse) => {
   if (error instanceof PrismaClientKnownRequestError) {
