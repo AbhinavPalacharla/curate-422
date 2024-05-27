@@ -45,9 +45,11 @@ const Navbar: React.FC<{}> = () => {
         <div className="w-[1%] bg-black/80 backdrop-blur-md" />
         <div className="flex flex-row justify-between items-center px-2 lg:px-12 py-3 mb-8 border-b-[1px] border-b-[#282828] bg-black/80 backdrop-blur-md w-[98%]">
           <div className="flex flex-row items-center gap-x-2">
-            <h1 className="text-[#646464] font-light text-sm italic">Index</h1>
+            <h1 className="text-[#646464] font-light text-sm italic">
+              Collection
+            </h1>
             <>
-              <h1 className="text-[#646464] font-light text-md italic">/</h1>
+              <h1 className="text-[#646464] font-light text-md">: :</h1>
 
               <Dropdown
                 // items={sampleCollectionsData}
