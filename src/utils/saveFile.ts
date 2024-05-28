@@ -31,7 +31,8 @@ const storeFile = async (fileName: string, file: File) => {
 const saveFile = async (b64File: string): Promise<string> => {
   const type = b64File.split(";")[0].split("/")[1];
 
-  const fileName = `${uuidv4()}.${type}`;
+  const fileId = uuidv4();
+  const fileName = `${fileId}.${type}`;
 
   const file = dataURLtoFile(b64File, fileName);
 

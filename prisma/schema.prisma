@@ -18,8 +18,9 @@ model Collection {
 }
 
 model Artifact {
-    id    Int             @id @default(autoincrement())
-    media ArtifactMedia[]
+    id          Int             @id @default(autoincrement())
+    media       ArtifactMedia[]
+    description String?
 
     collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
     collectionId Int

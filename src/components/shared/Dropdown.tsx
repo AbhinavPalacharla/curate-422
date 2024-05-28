@@ -61,7 +61,7 @@ const Dropdown: React.FC<{
           {action && (
             <div className="flex flex-row items-center justify-center pt-2 pb-1 border-t-[1px] border-[#282828]">
               <button
-                className="text-[#969696] text-xs font-light hover:text-white"
+                className="text-[#969696] text-xs font-light hover:text-white w-full"
                 onClick={action.onClick}
               >
                 {action.name}

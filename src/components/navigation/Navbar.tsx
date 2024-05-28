@@ -9,6 +9,7 @@ import axios from "axios";
 import type { IconName } from "@/utils";
 import { getIconByName } from "@/utils";
 import { useCollectionStore } from "@/stores";
+import { CreateArtifact } from "@/components/artifacts";
 
 const Navbar: React.FC<{}> = () => {
   const router = useRouter();
@@ -93,12 +94,13 @@ const Navbar: React.FC<{}> = () => {
               </Dropdown>
             </>
           </div>
-          <Button
-            name="New Post"
-            style="secondary"
-            size="small"
-            css="underline underline-offset-2"
-          />
+          <CreateArtifact>
+            <button className="ring-0 outline-none flex flex-row">
+              <span className="text-[#969696] hover:text-white underline underline-offset-2 text-sm font-light block truncate">
+                New Post
+              </span>
+            </button>
+          </CreateArtifact>
         </div>
         <div className="w-[1%] bg-black/80 backdrop-blur-md" />
       </div>

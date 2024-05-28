@@ -46,11 +46,21 @@ const Button: FC<ButtonPropTypes> = ({
     >
       {name}
     </button>
-  ) : (
+  ) : style == "delete" ? (
     <button
       className={`${
         size === "small" ? "text-sm" : "text-md"
       } text-md px-2 py-0.5 font-light text-[#969696] hover:text-red-500 ${css}`}
+      type={type}
+      onClick={onClick}
+    >
+      {name}
+    </button>
+  ) : (
+    <button
+      className={`${
+        size === "small" ? "text-sm" : "text-md"
+      } px-2 py-0.5 font-light text-[#969696] hover:text-white ${css}`}
       type={type}
       onClick={onClick}
     >
