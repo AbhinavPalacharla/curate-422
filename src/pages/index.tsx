@@ -26,14 +26,24 @@ const Page: NextPageWithLayout = (props: any) => {
     data && (
       <div className="my-24">
         {/* <h1 className="text-white">DATA: {JSON.stringify(data)}</h1> */}
-        {data.toReversed().map((artifact, i) => (
-          <Artifact
-            key={i}
-            media={artifact.media}
-            description={artifact.description ?? ""}
-            createdAt={artifact.createdAt}
-          />
-        ))}
+        {data.length ? (
+          data
+            .toReversed()
+            .map((artifact, i) => (
+              <Artifact
+                key={i}
+                media={artifact.media}
+                description={artifact.description ?? ""}
+                createdAt={artifact.createdAt}
+              />
+            ))
+        ) : (
+          <div className="flex flex-row items-center justify-center">
+            <h1 className="text-[#969696] text-sm font-light italic">
+              ~~~ No Artifacts ~~~
+            </h1>
+          </div>
+        )}
       </div>
     )
   );
