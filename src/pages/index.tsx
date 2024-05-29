@@ -1,8 +1,9 @@
 import type { NextPageWithLayout } from "@/components/layout";
 import { useCollectionStore } from "@/stores";
-import { Artifact, ArtifactMedia } from "@prisma/client";
+import type { Artifact as Artifact_T, ArtifactMedia } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { Artifact } from "@/components/artifacts";
 
 const Page: NextPageWithLayout = (props: any) => {
   const store = useCollectionStore();
@@ -14,9 +15,7 @@ const Page: NextPageWithLayout = (props: any) => {
         await axios.get(
           `/api/artifact/get.artifacts?collectionId=${store.collection?.id}`
         )
-      ).data as Array<Artifact & { media: ArtifactMedia }>;
-
-      console.log(data);
+      ).data as Array<Artifact_T & { media: Array<ArtifactMedia> }>;
 
       return data;
     },
@@ -25,8 +24,16 @@ const Page: NextPageWithLayout = (props: any) => {
 
   return (
     data && (
-      <div>
-        <h1 className="text-white">DATA: {JSON.stringify(data)}</h1>
+      <div className="my-24">
+        {/* <h1 className="text-white">DATA: {JSON.stringify(data)}</h1> */}
+        {data.toReversed().map((artifact, i) => (
+          <Artifact
+            key={i}
+            media={artifact.media}
+            description={artifact.description ?? ""}
+            createdAt={artifact.createdAt}
+          />
+        ))}
       </div>
     )
   );
