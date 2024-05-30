@@ -34,40 +34,46 @@ const Dropdown: React.FC<{
       <DropdownMenu.Trigger asChild>{children}</DropdownMenu.Trigger>
       <DropdownMenu.Portal>
         <DropdownMenu.Content
-          className="border-[1px] border-[#282828] bg-black/[0.83] backdrop-blur-md p-2 rounded-lg shadow-md shadow-black/80 flex flex-col gap-y-1 max-h-52"
+          // className="border-[1px] border-[#282828] bg-black/[0.83] backdrop-blur-md p-2 rounded-lg shadow-md shadow-black/80 flex flex-col gap-y-1 max-h-52"
           sideOffset={10}
           align="start"
         >
-          <div>
-            {items ? (
-              <div className="flex flex-col gap-y-1 overflow-y-scroll scrollbar-hide max-h-40">
-                {items?.map((item, index) => (
-                  <DropdownItem
-                    key={index}
-                    name={item.name}
-                    icon={item.icon}
-                    onClick={item.onClick}
-                  />
-                ))}
-              </div>
-            ) : (
-              <div className=" flex flex-row h-full items-center justify-center ">
-                <h1 className="text-[#969696] text-sm font-light w-48 p-2 flex flex-row justify-center">
-                  Loading...
-                </h1>
+          <div
+            className="border-[1px] border-[#282828] bg-black/[0.83]
+          backdrop-blur-md p-2 rounded-lg shadow-md shadow-black/80 flex
+          flex-col gap-y-1 max-h-52"
+          >
+            <div>
+              {items ? (
+                <div className="flex flex-col gap-y-1 overflow-y-scroll scrollbar-hide max-h-40">
+                  {items?.map((item, index) => (
+                    <DropdownItem
+                      key={index}
+                      name={item.name}
+                      icon={item.icon}
+                      onClick={item.onClick}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className=" flex flex-row h-full items-center justify-center ">
+                  <h1 className="text-[#969696] text-sm font-light w-48 p-2 flex flex-row justify-center">
+                    Loading...
+                  </h1>
+                </div>
+              )}
+            </div>
+            {action && (
+              <div className="flex flex-row items-center justify-center pt-2 pb-1 border-t-[1px] border-[#282828]">
+                <button
+                  className="text-[#969696] text-xs font-light hover:text-white w-full"
+                  onClick={action.onClick}
+                >
+                  {action.name}
+                </button>
               </div>
             )}
           </div>
-          {action && (
-            <div className="flex flex-row items-center justify-center pt-2 pb-1 border-t-[1px] border-[#282828]">
-              <button
-                className="text-[#969696] text-xs font-light hover:text-white w-full"
-                onClick={action.onClick}
-              >
-                {action.name}
-              </button>
-            </div>
-          )}
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>

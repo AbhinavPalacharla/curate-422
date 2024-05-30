@@ -25,7 +25,7 @@ const Artifact: React.FC<{
         action={{ name: "Delete", onClick: () => {} }}
       >
         <button
-          className={`text-[#969696] hover:text-white tracking-wide border-[1px] border-[#282828] w-7 h-7 rounded-md`}
+          className={`text-[#969696] hover:text-white tracking-wide border-[1px] border-[#282828] w-7 h-7 rounded-md ring-0 outline-none select-none`}
         >
           ···
         </button>
