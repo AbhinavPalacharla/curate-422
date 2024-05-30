@@ -71,6 +71,19 @@ const Artifact: React.FC<{
     },
   });
 
+  const deleteArtifactMutation = useMutation({
+    mutationFn: ({ artifactId }: { artifactId: number }) => {
+      return axios.post("/api/artifact/delete.artifact", {
+        artifactId,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["collections", store.collection.id],
+      });
+    },
+  });
+
   return (
     data && (
       <div className="border-[#292929] border-[1px] rounded-lg lg:rounded-md p-2 lg:p-4 lg:pb-6 mb-4">
@@ -116,7 +129,18 @@ const Artifact: React.FC<{
                 })
               ),
             },
-            { name: "Delete", icon: getIconByName({ name: "Trash" }) },
+            {
+              name: "Delete",
+              icon: getIconByName({
+                name: "Trash",
+              }),
+              onClick: () => {
+                console.log(`DELETE`);
+                deleteArtifactMutation.mutate({
+                  artifactId: id,
+                });
+              },
+            },
           ]}
         >
           <button

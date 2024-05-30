@@ -23,7 +23,7 @@ const DropdownItem: React.FC<Item> = ({ name, icon, onClick, subItems }) => {
                 {icon ? icon : <NullIcon size={"SMALL"} />}
               </div>
               <div className="flex flex-row w-40">
-                <span className="text-sm text-white font-light block truncate">
+                <span className="text-sm text-white  font-light block truncate">
                   {name}
                 </span>
               </div>
@@ -55,7 +55,7 @@ const DropdownItem: React.FC<Item> = ({ name, icon, onClick, subItems }) => {
     );
   } else
     return (
-      <DropdownMenu.Item className="hover:ring-0 hover:outline-none ring-0 outline-none">
+      <DropdownMenu.Item className="hover:ring-0 hover:outline-none ring-0 outline-none text-white">
         <button
           className="w-48 active:bg-[#141414] lg:hover:bg-[#141414]  rounded-md px-2 py-2"
           onClick={onClick}
@@ -65,7 +65,7 @@ const DropdownItem: React.FC<Item> = ({ name, icon, onClick, subItems }) => {
               {icon ? icon : <NullIcon size={"SMALL"} />}
             </div>
             <div className="flex flex-row w-40">
-              <span className="text-sm text-white font-light block truncate">
+              <span className={`text-sm font-light block truncate`}>
                 {name}
               </span>
             </div>
