@@ -32,6 +32,7 @@ const Page: NextPageWithLayout = (props: any) => {
             .map((artifact, i) => (
               <Artifact
                 key={i}
+                id={artifact.id}
                 media={artifact.media}
                 description={artifact.description ?? ""}
                 createdAt={artifact.createdAt}

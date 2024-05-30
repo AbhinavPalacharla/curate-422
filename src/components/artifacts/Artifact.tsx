@@ -4,64 +4,160 @@ import type { ArtifactMedia } from "@prisma/client";
 import { PostMetaInfo } from "./PostMetaInfo";
 import { Dropdown } from "../shared/Dropdown";
 import { getIconByName } from "@/utils";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+import type { Collection } from "@prisma/client";
+import type { IconName } from "@/utils";
+import { useCollectionStore } from "@/stores";
 
 const Artifact: React.FC<{
+  id: number;
   media: Array<ArtifactMedia>;
   description: string;
   createdAt: Date;
-}> = ({ media, description, createdAt }) => {
-  media = Array(3).fill(media[0]);
+}> = ({ id, media, description, createdAt }) => {
+  // media = Array(3).fill(media[0]);
+  const store = useCollectionStore();
+
+  const queryClient = useQueryClient();
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["collections"],
+    queryFn: async () => {
+      const data = (await axios.get("/api/collection/get.collections"))
+        .data as Array<Omit<Collection, "icon"> & { icon?: IconName }>;
+
+      return data;
+    },
+  });
+
+  const moveArtifactMutation = useMutation({
+    mutationFn: ({
+      artifactId,
+      collectionId,
+    }: {
+      artifactId: number;
+      collectionId: number;
+    }) => {
+      return axios.post("/api/artifact/move.artifact", {
+        artifactId,
+        collectionId,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["collections", store.collection.id],
+      });
+    },
+  });
+
+  const copyArtifactMutation = useMutation({
+    mutationFn: ({
+      artifactId,
+      collectionId,
+    }: {
+      artifactId: number;
+      collectionId: number;
+    }) => {
+      return axios.post("/api/artifact/copy.artifact", {
+        artifactId,
+        collectionId,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["collections", store.collection.id],
+      });
+    },
+  });
+
   return (
-    <div className="border-[#292929] border-[1px] rounded-lg lg:rounded-md p-2 lg:p-4 lg:pb-6 mb-4">
-      <Dropdown
-        items={[
-          {
-            name: "Move to ...",
-            icon: getIconByName({ name: "ArrowRightCircle" }),
-          },
-          { name: "Copy to ...", icon: getIconByName({ name: "Copy" }) },
-          // { name: "Delete", icon: getIconByName({ name: "Trash" }) },
-        ]}
-        action={{ name: "Delete", onClick: () => {} }}
-      >
-        <button
-          className={`text-[#969696] hover:text-white tracking-wide border-[1px] border-[#282828] w-7 h-7 rounded-md ring-0 outline-none select-none`}
+    data && (
+      <div className="border-[#292929] border-[1px] rounded-lg lg:rounded-md p-2 lg:p-4 lg:pb-6 mb-4">
+        <Dropdown
+          items={[
+            {
+              name: "Move to ...",
+              icon: getIconByName({ name: "ArrowRightCircle" }),
+              subItems: data?.map(
+                (
+                  collection: Omit<Collection, "icon"> & { icon?: IconName }
+                ) => ({
+                  name: collection.name,
+                  icon: collection.icon
+                    ? getIconByName({ name: collection.icon })
+                    : "",
+                  onClick: () => {
+                    moveArtifactMutation.mutate({
+                      artifactId: id,
+                      collectionId: collection.id,
+                    });
+                  },
+                })
+              ),
+            },
+            {
+              name: "Copy to ...",
+              icon: getIconByName({ name: "Copy" }),
+              subItems: data?.map(
+                (
+                  collection: Omit<Collection, "icon"> & { icon?: IconName }
+                ) => ({
+                  name: collection.name,
+                  icon: collection.icon
+                    ? getIconByName({ name: collection.icon })
+                    : "",
+                  onClick: () => {
+                    copyArtifactMutation.mutate({
+                      artifactId: id,
+                      collectionId: collection.id,
+                    });
+                  },
+                })
+              ),
+            },
+            { name: "Delete", icon: getIconByName({ name: "Trash" }) },
+          ]}
         >
-          ···
-        </button>
-      </Dropdown>
-      {media && (
-        <div className="pt-4">
-          {media.length === 1 ? (
-            <div className="flex flex-row items-center justify-center">
-              <Image
-                key={media[0].imageURL}
-                alt={"Image"}
-                src={media[0].imageURL}
-                width={4096}
-                height={4096}
-                className="rounded-sm max-w-[100%] lg:min-h-[24rem] max-h-[36rem] w-auto"
-              />
-            </div>
-          ) : (
-            <div className="flex flex-row overflow-x-scroll scroll-smooth gap-x-4 scrollbar-hide">
-              {media.map((m) => (
+          <button
+            className={`text-[#969696] hover:text-white tracking-wide border-[1px] border-[#282828] w-7 h-7 rounded-md ring-0 outline-none select-none`}
+          >
+            ···
+          </button>
+        </Dropdown>
+        {media && (
+          <div className="pt-4">
+            {media.length === 1 ? (
+              <div className="flex flex-row items-center justify-center">
                 <Image
-                  key={m.imageURL}
+                  key={media[0].imageURL}
                   alt={"Image"}
-                  src={m.imageURL}
+                  src={media[0].imageURL}
                   width={4096}
                   height={4096}
-                  className="h-96 max-w-none w-auto rounded-sm"
+                  className="rounded-sm max-w-[100%] lg:min-h-[24rem] max-h-[36rem] w-auto"
                 />
-              ))}
-            </div>
-          )}
-        </div>
-      )}
-      <h1 className="text-white pt-4">{description}</h1>
-      <PostMetaInfo date={createdAt} />
-    </div>
+              </div>
+            ) : (
+              <div className="flex flex-row overflow-x-scroll scroll-smooth gap-x-4 scrollbar-hide">
+                {media.map((m) => (
+                  <Image
+                    key={m.imageURL}
+                    alt={"Image"}
+                    src={m.imageURL}
+                    width={4096}
+                    height={4096}
+                    className="h-96 max-w-none w-auto rounded-sm"
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+        <h1 className="text-white pt-4">{description}</h1>
+        <PostMetaInfo date={createdAt} />
+      </div>
+    )
   );
 };
 
