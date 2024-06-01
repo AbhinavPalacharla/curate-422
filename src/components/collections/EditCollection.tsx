@@ -126,7 +126,7 @@ const EditCollection: React.FC<{
                 Icon
               </h1>
               <IconPicker setIcon={setIcon}>
-                <div className="border-[1px] border-[#282828] p-2 rounded-md">
+                <div className="border-[1px] border-[#282828] p-2 rounded-md select-none">
                   {getIconByName({
                     name: icon ?? data?.icon,
                     nullIcon: { size: "LARGE" },
@@ -143,14 +143,6 @@ const EditCollection: React.FC<{
               onBlur={handleSubmit((data) => {
                 editCollectionMutation.mutate({ name: data.name });
               })}
-              // onSubmit={() => {
-              //   console.log("FORM SUBMITTED");
-              //   handleSubmit(onSubmit);
-              // }}
-              // onBlur={() => {
-              //   console.log("BLUR FORM");
-              //   handleSubmit(onSubmit);
-              // }}
             >
               <h1
                 className={`text-sm text-[#969696] font-light ${robotoMono.className}`}

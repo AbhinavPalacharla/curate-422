@@ -50,7 +50,9 @@ const CreateCollection: React.FC<{
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-row items-center py-4 relative">
           <IconPicker setIcon={setIcon}>
-            <div className="w-6">{getIconByName({ name: icon })}</div>
+            <div className="w-6 select-none">
+              {getIconByName({ name: icon })}
+            </div>
           </IconPicker>
           <input
             {...register("name")}

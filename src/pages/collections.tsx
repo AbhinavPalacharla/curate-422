@@ -1,6 +1,6 @@
 import type { NextPageWithLayout } from "@/components/layout";
 import axios from "axios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { Plus, LongArrowUpLeft } from "iconoir-react";
 import { getIconByName, IconName } from "@/utils";
 import { useState } from "react";
@@ -15,18 +15,41 @@ const Collection: React.FC<{
   name: string;
   setEditCollection: (id: number) => void;
 }> = ({ id, icon, name, setEditCollection }) => {
+  const queryClient = useQueryClient();
+
+  const deleteCollectionMutation = useMutation({
+    mutationFn: () => {
+      return axios.post("/api/collection/delete.collection", { id });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["collections"] });
+    },
+  });
+
   return (
     <div className="flex flex-row items-center py-4 relative">
       <div className="w-6">{getIconByName({ name: icon })}</div>
       <h1 className="text-white text-sm ml-8 w-40 truncate">{name}</h1>
-      <button
-        className="text-[#969696] lg:hover:text-white active:text-white text-sm font-light underline underline-offset-1 absolute right-2"
-        onClick={() => {
-          setEditCollection(id);
-        }}
-      >
-        edit
-      </button>
+      {id != 1 && (
+        <div className="flex flex-row items-center gap-x-6 absolute right-2">
+          <button
+            className="text-[#969696] lg:hover:text-white active:text-white text-sm font-light underline underline-offset-1"
+            onClick={() => {
+              setEditCollection(id);
+            }}
+          >
+            edit
+          </button>
+          <button
+            className="text-[#969696] lg:hover:text-red-500 active:text-red-500 text-sm font-light"
+            onClick={() => {
+              deleteCollectionMutation.mutate();
+            }}
+          >
+            delete
+          </button>
+        </div>
+      )}
     </div>
   );
 };
