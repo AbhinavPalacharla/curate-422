@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { Divider } from "@/components/shared";
 import type { Collection } from "@prisma/client";
 import { CreateCollection, EditCollection } from "@/components/collections";
+import { useCollectionStore } from "@/stores";
 
 const Collection: React.FC<{
   id: number;
@@ -17,12 +18,17 @@ const Collection: React.FC<{
 }> = ({ id, icon, name, setEditCollection }) => {
   const queryClient = useQueryClient();
 
+  const store = useCollectionStore();
+
   const deleteCollectionMutation = useMutation({
     mutationFn: () => {
       return axios.post("/api/collection/delete.collection", { id });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["collections"] });
+      if (store.collection.id == id) {
+        store.setCollection({ id: 1, name: "The Pile", icon: "ReportColumns" });
+      }
     },
   });
 
