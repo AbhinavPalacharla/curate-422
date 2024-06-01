@@ -91,7 +91,7 @@ const Artifact: React.FC<{
           items={[
             {
               name: "Move to ...",
-              icon: getIconByName({ name: "ArrowRightCircle" }),
+              icon: getIconByName({ name: "ArrowRightCircle", size: 18 }),
               subItems: data?.map(
                 (
                   collection: Omit<Collection, "icon"> & { icon?: IconName }
@@ -111,14 +111,14 @@ const Artifact: React.FC<{
             },
             {
               name: "Copy to ...",
-              icon: getIconByName({ name: "Copy" }),
+              icon: getIconByName({ name: "Copy", size: 18 }),
               subItems: data?.map(
                 (
                   collection: Omit<Collection, "icon"> & { icon?: IconName }
                 ) => ({
                   name: collection.name,
                   icon: collection.icon
-                    ? getIconByName({ name: collection.icon })
+                    ? getIconByName({ name: collection.icon, size: 18 })
                     : "",
                   onClick: () => {
                     copyArtifactMutation.mutate({
@@ -133,6 +133,7 @@ const Artifact: React.FC<{
               name: "Delete",
               icon: getIconByName({
                 name: "Trash",
+                size: 18,
               }),
               onClick: () => {
                 console.log(`DELETE`);
