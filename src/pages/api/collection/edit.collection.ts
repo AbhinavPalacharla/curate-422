@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: edit.collection.ts: Describes the handler for the API request to edit a collection
+
 import { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "@/utils";
 import { handleError } from "@/utils/handleError";

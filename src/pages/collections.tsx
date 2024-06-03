@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: collections.tsx: Contains component declaration for Collections viewing interface, as well as all functions required to run it
+
 import type { NextPageWithLayout } from "@/components/layout";
 import axios from "axios";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";

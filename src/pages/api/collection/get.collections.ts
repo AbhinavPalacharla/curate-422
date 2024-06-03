@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: get.collections.ts: Describes the handler for the API request to get all collections
+
 import type { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "@/utils";
 import { handleError } from "@/utils/handleError";

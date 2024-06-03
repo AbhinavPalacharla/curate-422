@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: Artifact.tsx: Describes the Artifact component, which handles all of the UI related to displaying a single Artifact.
+
 import Image from "next/image";
 import Link from "next/link";
 import type { ArtifactMedia } from "@prisma/client";

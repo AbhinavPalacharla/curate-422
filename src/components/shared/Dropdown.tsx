@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: Button.tsx: Generic Drop Down menu for reuse
+
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import React from "react";
 import { NullIcon } from "./NullIcon";

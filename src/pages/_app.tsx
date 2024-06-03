@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: _app.tsx: Base structure for all interfaces in the application. Allows arbitrary component to render with Layout
+
 import "@/styles/globals.css";
 
 import type { NextPageWithLayout } from "@/components/layout";

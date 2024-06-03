@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: CreateArtifact.tsx: Describes the component used for creating Artifacts as well as the functions used to initialize them in the Database.
+
 import React, { useState } from "react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { useForm } from "react-hook-form";

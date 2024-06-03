@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: handleError.ts: creates a functions to handle bad request errors. 
+
 import type { NextApiResponse } from "next";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 // import { PrismaClientKnownRequestError } from "@prisma/client/runtime";

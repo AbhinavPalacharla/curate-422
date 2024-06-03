@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: Button.tsx: Generic button component for reuse
+
 import { FC, HTMLAttributes } from "react";
 
 type ButtonPropTypes = {

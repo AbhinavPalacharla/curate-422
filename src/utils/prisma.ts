@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: prisma.ts: initialization functions for Prisma ORM, run at the start of the program.
+
 import { PrismaClient } from "@prisma/client";
 
 declare global {
