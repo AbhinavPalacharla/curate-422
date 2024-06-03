@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: Navbar.tsx: Describes the header navigation bar used to switch between collections and create new artifacts.
+
 "use client";
 
 import { useRouter } from "next/router";

@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: CreateCollection.tsx: Describes the Create Collection UI component, as well as the functions used to create an input collection in the Database.
+
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Divider } from "@/components/shared";

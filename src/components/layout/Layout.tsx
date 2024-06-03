@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: Layout.tsx: This file describes the layout of the basic page used in the interface.
+
 import { Navbar, Footer } from "@/components/navigation";
 import { Inter } from "next/font/google";
 import type { NextPage } from "next";

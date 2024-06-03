@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: Button.tsx: Generic null (empty) icon for reuse.
+
 const NullIcon: React.FC<{ size?: "SMALL" | "REGULAR" | "LARGE" }> = ({
   size,
 }) => {

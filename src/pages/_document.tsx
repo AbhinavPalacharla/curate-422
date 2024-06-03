@@ -1,16 +1,6 @@
-// import { Html, Head, Main, NextScript } from 'next/document'
-
-// export default function Document() {
-//   return (
-//     <Html lang="en">
-//       <Head />
-//       <body>
-//         <Main />
-//         <NextScript />
-//       </body>
-//     </Html>
-//   )
-// }
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: _documents.tsx: Sets up HTML layout for the 'document' used to hold the application. Includes icon, title, background color
 
 import { Html, Head, Main, NextScript } from "next/document";
 

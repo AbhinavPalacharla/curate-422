@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: Button.tsx: Generic icon picker component for reuse
+
 import { Roboto_Mono } from "next/font/google";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { getIconByName, IconName, iconNames } from "@/utils";

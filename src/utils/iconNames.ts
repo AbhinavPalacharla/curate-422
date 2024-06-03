@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: iconNames.ts: constant array of icon names, in ID order.
+
 const iconNames: Array<IconName> = [
   "Svg3DAddHole",
   "Svg3DArcCenterPt",

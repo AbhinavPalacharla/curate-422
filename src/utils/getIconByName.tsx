@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: getIconByName.tsx: Creates a utility function that allows you to access icons based on the names defined in iconNames.ts
+
 import { NullIcon } from "@/components/shared";
 import * as icons from "iconoir-react";
 import type { IconName } from "./iconNames";

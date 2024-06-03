@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: schema.prisma: Describes all of the datastructures stored in the database, with their components.
+
 datasource db {
     // provider = "postgresql"
     // url      = env("DATABASE_URL")

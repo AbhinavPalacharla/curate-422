@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: Footer.tsx: Describes the footer of the default page. This includes an icon, title, date, and author.
+
 import Image from "next/image";
 import CurateMiniLogo from "/public/curate-mini.svg";
 import { Roboto_Mono } from "next/font/google";

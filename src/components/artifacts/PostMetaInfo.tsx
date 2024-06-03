@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: PostMetaInfo.tsx: Mostly deprecated, but allows Artifacts to be displayed with a customizable Metadata structure. Only displays date currently.
+
 import { Roboto_Mono } from "next/font/google";
 import { Dropdown } from "@/components/shared/Dropdown";
 import { getIconByName } from "@/utils";

@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: EditCollection.tsx: Describes the component used to edit a collection, as well as the function used to apply those edits to the database.
+
 import Avatar from "boring-avatars";
 import { IconPicker, Divider } from "@/components/shared";
 import { useState, useEffect } from "react";

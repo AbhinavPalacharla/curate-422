@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: index.tsx: Creates the Page component which displays a collection
+
 import type { NextPageWithLayout } from "@/components/layout";
 import { useCollectionStore } from "@/stores";
 import type { Artifact as Artifact_T, ArtifactMedia } from "@prisma/client";
