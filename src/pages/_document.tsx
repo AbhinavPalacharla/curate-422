@@ -1,3 +1,10 @@
+/*
+_document.tsx
+AUTHORS: NA, FC, VD, RK, AP
+LAST EDITED: 6-3-2024
+DESCRIPTION: _document.tsx: Describes the document component. It defines the HTML document that is rendered on the server
+*/
+
 // import { Html, Head, Main, NextScript } from 'next/document'
 
 // export default function Document() {
@@ -14,6 +21,7 @@
 
 import { Html, Head, Main, NextScript } from "next/document";
 
+// Defines the document components
 export default function Document() {
   return (
     <Html style={{ backgroundColor: "#000000" }}>

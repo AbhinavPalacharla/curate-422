@@ -1,7 +1,16 @@
+/*
+Artifact.tsx
+AUTHORS: NA, FC, VD, RK, AP
+LAST EDITED: 6-3-2024
+DESCRIPTION: Dropdown.tsx: Describes the "Dropdown" component which allows users to navigate through
+drop down menus.
+*/
+
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import React from "react";
 import { NullIcon } from "./NullIcon";
 
+// Creates the Item type which will define each item in the drop down menu
 type Item = {
   name: string;
   icon?: React.ReactNode;
@@ -9,8 +18,9 @@ type Item = {
   subItems?: Array<Item>;
 };
 
+// This descibes the React Functional Component called DropdownItem
 const DropdownItem: React.FC<Item> = ({ name, icon, onClick, subItems }) => {
-  if (subItems) {
+  if (subItems) { // If there are sub items show them
     return (
       <DropdownMenu.Sub>
         <DropdownMenu.SubTrigger className="hover:ring-0 hover:outline-none ring-0 outline-none">
@@ -54,7 +64,7 @@ const DropdownItem: React.FC<Item> = ({ name, icon, onClick, subItems }) => {
       </DropdownMenu.Sub>
     );
   } else
-    return (
+    return ( // If there are no sub items, don't show any sub items
       <DropdownMenu.Item className="hover:ring-0 hover:outline-none ring-0 outline-none text-white">
         <button
           className="w-48 active:bg-[#141414] lg:hover:bg-[#141414]  rounded-md px-2 py-2"
@@ -75,6 +85,7 @@ const DropdownItem: React.FC<Item> = ({ name, icon, onClick, subItems }) => {
     );
 };
 
+// This describes the React Functional Component called Dropdown
 const Dropdown: React.FC<{
   children: React.ReactNode;
   items?: Array<Item>;

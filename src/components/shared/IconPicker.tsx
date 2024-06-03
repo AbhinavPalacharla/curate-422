@@ -1,12 +1,21 @@
+/*
+IconPicker.tsx
+AUTHORS: NA, FC, VD, RK, AP
+LAST EDITED: 6-3-2024
+DESCRIPTION: IconPicker.tsx: Describes the "IconPicker" component which allows a user to choose an icon
+*/
+
 import { Roboto_Mono } from "next/font/google";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { getIconByName, IconName, iconNames } from "@/utils";
 
+// Imports the Roboto Mono font
 const robotoMono = Roboto_Mono({
   weight: "variable",
   subsets: ["latin"],
 });
 
+// Describes a React Functional Component called IconPicker
 const IconPicker: React.FC<{
   children: React.ReactNode;
   setIcon: (iconName: IconName) => void;

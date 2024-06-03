@@ -1,12 +1,21 @@
+/*
+Footer.tsx
+AUTHORS: NA, FC, VD, RK, AP
+LAST EDITED: 6-3-2024
+DESCRIPTION: Footer.tsx: Describes the "footer" component 
+*/
+
 import Image from "next/image";
 import CurateMiniLogo from "/public/curate-mini.svg";
 import { Roboto_Mono } from "next/font/google";
 
+// Imports to Roboto Mono font
 const robotoMono = Roboto_Mono({
   weight: "variable",
   subsets: ["latin"],
 });
 
+// Describes the React Functional Component Footer
 const Footer: React.FC = () => {
   return (
     <div className="flex flex-row items-center">

@@ -1,3 +1,10 @@
+/*
+EditCollection.tsx
+AUTHORS: NA, FC, VD, RK, AP
+LAST EDITED: 6-3-2024
+DESCRIPTION: EditCollection.tsx: This allows the user to edit a collection.
+*/
+
 import Avatar from "boring-avatars";
 import { IconPicker, Divider } from "@/components/shared";
 import { useState, useEffect } from "react";
@@ -16,28 +23,34 @@ import type { Collection } from "@prisma/client";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+// Imports the Roboto Mono font
 const robotoMono = Roboto_Mono({
   weight: "variable",
   subsets: ["latin"],
 });
 
+// This describes the React Functional Component EditCollection
 const EditCollection: React.FC<{
   collectionId: number;
   setEditCollection: (id: number) => void;
 }> = ({ collectionId, setEditCollection }) => {
   const [icon, setIcon] = useState<IconName>();
 
+  // Allows for form validation
   const schema = z.object({
     name: z.string().min(1).max(20).optional(),
   });
 
+  // Validates the form
   const { register, handleSubmit } = useForm<z.infer<typeof schema>>({
     mode: "onBlur",
     resolver: zodResolver(schema),
   });
 
+  // The query client for cache management
   const queryClient = useQueryClient();
 
+  // Fetches collection data
   const { data, isLoading } = useQuery({
     queryKey: [`collection_${collectionId}`, "collections"],
     queryFn: async () => {
@@ -60,6 +73,7 @@ const EditCollection: React.FC<{
   //   icon: "AddLens",
   // };
 
+  // This uses a mutation to edit a collection
   const editCollectionMutation = useMutation({
     mutationFn: ({ ...data }: z.infer<typeof schema> & { icon?: IconName }) => {
       return axios.post("/api/collection/edit.collection", {
@@ -68,6 +82,7 @@ const EditCollection: React.FC<{
       });
     },
     onSuccess: () => {
+      // Invalidates the query to refresh the data
       console.log("MUTATION SUCCESS");
       queryClient.invalidateQueries({
         queryKey: ["collections", `collection_${collectionId}`],
@@ -83,9 +98,12 @@ const EditCollection: React.FC<{
   //   editCollectionMutation.mutate(data);
   // };
 
+  // This handles the change of icon
   useEffect(() => {
     icon && editCollectionMutation.mutate({ icon: icon! });
   }, [icon]);
+
+
 
   return (
     data && (

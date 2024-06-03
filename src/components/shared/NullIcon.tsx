@@ -1,3 +1,11 @@
+/*
+Nullcon.tsx
+AUTHORS: NA, FC, VD, RK, AP
+LAST EDITED: 6-3-2024
+DESCRIPTION: NullIcon.tsx: Describes the "Nullcon" component which displays when there isn't another icon.
+*/
+
+// This describes a React Functional Component called NullIcon
 const NullIcon: React.FC<{ size?: "SMALL" | "REGULAR" | "LARGE" }> = ({
   size,
 }) => {

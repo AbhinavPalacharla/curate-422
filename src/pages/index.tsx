@@ -1,3 +1,10 @@
+/*
+index.tsx
+AUTHORS: NA, FC, VD, RK, AP
+LAST EDITED: 6-3-2024
+DESCRIPTION: index.tsx: Describes main page component of the application
+*/
+
 import type { NextPageWithLayout } from "@/components/layout";
 import { useCollectionStore } from "@/stores";
 import type { Artifact as Artifact_T, ArtifactMedia } from "@prisma/client";
@@ -5,9 +12,12 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Artifact } from "@/components/artifacts";
 
+// Defines the Page component
 const Page: NextPageWithLayout = (props: any) => {
+  // Initialize store
   const store = useCollectionStore();
 
+  // Fetch data from the query
   const { data, isLoading } = useQuery({
     queryKey: ["collections", store.collection.id],
     queryFn: async () => {
@@ -19,11 +29,12 @@ const Page: NextPageWithLayout = (props: any) => {
 
       return data;
     },
+    // fetch every second
     refetchInterval: 1,
   });
 
   return (
-    data && (
+    data && ( // describes the main page if there is data
       <div className="my-24">
         {/* <h1 className="text-white">DATA: {JSON.stringify(data)}</h1> */}
         {data.length ? (

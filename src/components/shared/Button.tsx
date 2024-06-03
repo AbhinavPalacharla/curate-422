@@ -1,5 +1,13 @@
+/*
+Button.tsx
+AUTHORS: NA, FC, VD, RK, AP
+LAST EDITED: 6-3-2024
+DESCRIPTION: Button.tsx: Describes the "button" component which allows for buttons with similar formatting between pages
+*/
+
 import { FC, HTMLAttributes } from "react";
 
+// creates the button properties types type called ButtonPropTypes
 type ButtonPropTypes = {
   name: string;
   type?: "button" | "submit" | "reset";
@@ -11,6 +19,7 @@ type ButtonPropTypes = {
   onClick?: () => void;
 };
 
+// Describes a React Functional Component called Button
 const Button: FC<ButtonPropTypes> = ({
   name,
   style,
