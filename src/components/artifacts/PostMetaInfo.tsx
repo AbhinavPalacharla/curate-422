@@ -1,16 +1,21 @@
-/// AUTHORS: AP, VD
-/// LAST EDITED: 6-3-2024
-/// DESCRIPTION: PostMetaInfo.tsx: Mostly deprecated, but allows Artifacts to be displayed with a customizable Metadata structure. Only displays date currently.
+/*
+PostMetaInfo.tsx
+AUTHORS: NA, FC, VD, RK, AP
+LAST EDITED: 6-3-2024
+DESCRIPTION: PostMetaInfo.tsx: This is used to display and format strings
+*/
 
 import { Roboto_Mono } from "next/font/google";
 import { Dropdown } from "@/components/shared/Dropdown";
 import { getIconByName } from "@/utils";
 
+// Imports the Roboto Mono font
 const robotoMono = Roboto_Mono({
   weight: "variable",
   subsets: ["latin"],
 });
 
+// Defines the React Function Component PostMetaInfo 
 const PostMetaInfo: React.FC<{
   date: Date;
 }> = ({ date }) => {

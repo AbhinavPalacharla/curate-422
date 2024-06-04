@@ -1,6 +1,10 @@
-/// AUTHORS: AP, VD
-/// LAST EDITED: 6-3-2024
-/// DESCRIPTION: CreateArtifact.tsx: Describes the component used for creating Artifacts as well as the functions used to initialize them in the Database.
+/*
+CreateArtifact.tsx
+AUTHORS: NA, FC, VD, RK, AP
+LAST EDITED: 6-3-2024
+DESCRIPTION: CreateArtifact.tsx: Describes the "CreateArtifact" component which allows for users to
+input their own media and turns them into artifacts.
+*/
 
 import React, { useState } from "react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
@@ -10,38 +14,48 @@ import { Roboto_Mono } from "next/font/google";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useCollectionStore } from "@/stores";
 
+// Imports the Roboto Mono font
 const robotoMono = Roboto_Mono({
   weight: "variable",
   subsets: ["latin"],
 });
 
+// Defines the React Functional Component "CreateArtifact" 
 const CreateArtifact: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  // Initialize react form components
   const { register, handleSubmit, setValue, reset } = useForm();
 
+  // Hook to access the global state of components
   const store = useCollectionStore();
 
+  // The query client for cache management
   const queryClient = useQueryClient();
 
+  // This defines a mutation for creating an artifact
   const createArtifactMutation = useMutation({
     mutationFn: (data: { description: string; b64File: string }) => {
+      // Uses a POST request to submit a new artifact
       return axios.post("/api/artifact/create.artifact", {
         description: data.description,
         b64File: data.b64File,
       });
     },
     onSuccess: async () => {
+      // Invalidates the query to refresh the data
       await queryClient.invalidateQueries({
         queryKey: ["collections", store.collection.id],
       });
     },
   });
 
+  // This handles form submission
   const onSubmit = (data: any) => {
     console.log(`DATA: ${JSON.stringify(data)}`);
 
     // await axios.post("/api/upload", { b64File: data.b64File });
+    // Calls the mutation to create and submit artifact
     createArtifactMutation.mutate({
       description: data.description,
       b64File: data.b64File,
@@ -49,6 +63,7 @@ const CreateArtifact: React.FC<{ children: React.ReactNode }> = ({
     reset();
   };
 
+  // This will handle the file change to base 64.
   const handleFileChange = async (e: any) => {
     const file = e.target.files[0];
 
@@ -58,6 +73,7 @@ const CreateArtifact: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
+  // Converts the file to base 64
   const convertToBase64 = (file: any) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();

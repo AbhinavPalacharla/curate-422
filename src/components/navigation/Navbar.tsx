@@ -1,6 +1,9 @@
-/// AUTHORS: AP, VD
-/// LAST EDITED: 6-3-2024
-/// DESCRIPTION: Navbar.tsx: Describes the header navigation bar used to switch between collections and create new artifacts.
+/*
+Navbar.ts
+AUTHORS: NA, FC, VD, RK, AP
+LAST EDITED: 6-3-2024
+DESCRIPTION: Navbar.ts: Describes the Navbar component which allows the user to easy navigate the application
+*/
 
 "use client";
 
@@ -15,11 +18,15 @@ import { getIconByName } from "@/utils";
 import { useCollectionStore } from "@/stores";
 import { CreateArtifact } from "@/components/artifacts";
 
+// Describes a React Functional Component called Navbar
 const Navbar: React.FC<{}> = () => {
+  // inisitializes the router
   const router = useRouter();
 
+  // initializes the query
   const queryClient = useQueryClient();
 
+  // fetches data from the query
   const { data, isLoading } = useQuery({
     queryKey: ["collections"],
     queryFn: async () => {
@@ -32,6 +39,7 @@ const Navbar: React.FC<{}> = () => {
     },
   });
 
+  // Initializes the collection store to manage states
   const store = useCollectionStore();
 
   // const data: Array<{
@@ -45,7 +53,7 @@ const Navbar: React.FC<{}> = () => {
   // ];
 
   return (
-    data && (
+    data && ( // ensures data is true
       <div className="flex flex-row items-center">
         <div className="w-[1%] bg-black/80 backdrop-blur-md" />
         <div className="flex flex-row justify-between items-center px-2 lg:px-12 py-3 mb-8 border-b-[1px] border-b-[#282828] bg-black/80 backdrop-blur-md w-[98%]">

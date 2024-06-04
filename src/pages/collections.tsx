@@ -1,6 +1,9 @@
-/// AUTHORS: AP, VD
-/// LAST EDITED: 6-3-2024
-/// DESCRIPTION: collections.tsx: Contains component declaration for Collections viewing interface, as well as all functions required to run it
+/*
+collections.tsx
+AUTHORS: NA, FC, VD, RK, AP
+LAST EDITED: 6-3-2024
+DESCRIPTION: collections.tsx: Describes how to the collections are managerd.
+*/
 
 import type { NextPageWithLayout } from "@/components/layout";
 import axios from "axios";
@@ -14,21 +17,27 @@ import type { Collection } from "@prisma/client";
 import { CreateCollection, EditCollection } from "@/components/collections";
 import { useCollectionStore } from "@/stores";
 
+// Describes the React Functional Component called Collection
 const Collection: React.FC<{
   id: number;
   icon?: IconName;
   name: string;
   setEditCollection: (id: number) => void;
 }> = ({ id, icon, name, setEditCollection }) => {
+
+  // Itialize the query
   const queryClient = useQueryClient();
 
+  // Intialize store
   const store = useCollectionStore();
 
+  // A mutation to delete a collection
   const deleteCollectionMutation = useMutation({
     mutationFn: () => {
       return axios.post("/api/collection/delete.collection", { id });
     },
     onSuccess: () => {
+      // Invalidate the Query so teh information is reloaded
       queryClient.invalidateQueries({ queryKey: ["collections"] });
       if (store.collection.id == id) {
         store.setCollection({ id: 1, name: "The Pile", icon: "ReportColumns" });
@@ -64,12 +73,16 @@ const Collection: React.FC<{
   );
 };
 
+// Defines the page component
 const Page: NextPageWithLayout = (props: any) => {
+  // Uses states to manage collections
   const [showCreateCollection, setShowCreateCollection] = useState(false);
   const [editCollection, setEditCollection] = useState<number | undefined>();
 
+  // Initializes the Query
   const queryClient = useQueryClient();
 
+  // Fetches information from the query
   const { data, isLoading } = useQuery({
     queryKey: ["collections"],
     queryFn: async () => {
@@ -102,6 +115,7 @@ const Page: NextPageWithLayout = (props: any) => {
   //   { id: 3, name: "Collection 3" },
   // ];
 
+  // Initializes a router
   const router = useRouter();
 
   return (

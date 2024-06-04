@@ -1,6 +1,10 @@
-/// AUTHORS: AP, VD
-/// LAST EDITED: 6-3-2024
-/// DESCRIPTION: Artifact.tsx: Describes the Artifact component, which handles all of the UI related to displaying a single Artifact.
+/*
+Artifact.tsx
+AUTHORS: NA, FC, VD, RK, AP
+LAST EDITED: 6-3-2024
+DESCRIPTION: Artifact.tsx: Describes the "artifact" component which contains all media data within our application.
+*/
+
 
 import Image from "next/image";
 import Link from "next/link";
@@ -14,6 +18,7 @@ import type { Collection } from "@prisma/client";
 import type { IconName } from "@/utils";
 import { useCollectionStore } from "@/stores";
 
+// This defines the React Functional Component "Artifact" which will be used to store media
 const Artifact: React.FC<{
   id: number;
   media: Array<ArtifactMedia>;
@@ -21,13 +26,18 @@ const Artifact: React.FC<{
   createdAt: Date;
 }> = ({ id, media, description, createdAt }) => {
   // media = Array(3).fill(media[0]);
+
+  // Hook to access the global state of components
   const store = useCollectionStore();
 
+  // The query client for cache management
   const queryClient = useQueryClient();
 
+  // This will fetch the collections data using Quaries
   const { data, isLoading } = useQuery({
     queryKey: ["collections"],
     queryFn: async () => {
+      // This fetches the collection from the API 
       const data = (await axios.get("/api/collection/get.collections"))
         .data as Array<Omit<Collection, "icon"> & { icon?: IconName }>;
 
@@ -35,6 +45,7 @@ const Artifact: React.FC<{
     },
   });
 
+  // This uses a mutation to move artifacts between collections
   const moveArtifactMutation = useMutation({
     mutationFn: ({
       artifactId,
@@ -43,18 +54,21 @@ const Artifact: React.FC<{
       artifactId: number;
       collectionId: number;
     }) => {
+      // Make a POST request to remove an artifact
       return axios.post("/api/artifact/move.artifact", {
         artifactId,
         collectionId,
       });
     },
     onSuccess: () => {
+      // Invalidates the query to refresh the data
       queryClient.invalidateQueries({
         queryKey: ["collections", store.collection.id],
       });
     },
   });
 
+  // This uses a mutation to create another of the same artifact and put it in a new collection
   const copyArtifactMutation = useMutation({
     mutationFn: ({
       artifactId,
@@ -63,18 +77,21 @@ const Artifact: React.FC<{
       artifactId: number;
       collectionId: number;
     }) => {
+      // This uses a POST request to move add the artifact to another collection
       return axios.post("/api/artifact/copy.artifact", {
         artifactId,
         collectionId,
       });
     },
     onSuccess: () => {
+      // Invalidates the query to refresh the data 
       queryClient.invalidateQueries({
         queryKey: ["collections", store.collection.id],
       });
     },
   });
 
+  // This uses a mutation to delete an artifact from a collection
   const deleteArtifactMutation = useMutation({
     mutationFn: ({ artifactId }: { artifactId: number }) => {
       return axios.post("/api/artifact/delete.artifact", {
@@ -82,6 +99,7 @@ const Artifact: React.FC<{
       });
     },
     onSuccess: () => {
+      // This ivalidates the query to refresh the data 
       queryClient.invalidateQueries({
         queryKey: ["collections", store.collection.id],
       });

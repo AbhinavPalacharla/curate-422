@@ -1,6 +1,10 @@
-/// AUTHORS: AP, VD
-/// LAST EDITED: 6-3-2024
-/// DESCRIPTION: CreateCollection.tsx: Describes the Create Collection UI component, as well as the functions used to create an input collection in the Database.
+/*
+CreateCollection.tsx
+AUTHORS: NA, FC, VD, RK, AP
+LAST EDITED: 6-3-2024
+DESCRIPTION: CreateCollection.tsx: This lets the user create collection components to fill with artifacts
+and organize media
+*/
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,6 +16,7 @@ import { useState } from "react";
 import axios from "axios";
 import { getIconByName, IconName } from "@/utils";
 
+// Defines the React Functional Component CreateCollection 
 const CreateCollection: React.FC<{
   setShowCreateCollection: (state: boolean) => void;
 }> = ({ setShowCreateCollection }) => {
@@ -20,32 +25,40 @@ const CreateCollection: React.FC<{
   });
 
   const {
+    // Use React Hooks register, handleSubmit, watch, formState.
     register,
     handleSubmit,
     watch,
     formState: { errors, isValid, isLoading, isDirty },
   } = useForm<z.infer<typeof schema>>({
+    // Validation
     mode: "onBlur",
     resolver: zodResolver(schema),
   });
 
+
   const [icon, setIcon] = useState<IconName>();
 
+  // The query client for cache management
   const queryClient = useQueryClient();
 
+  // This mutation creates a collection
   const createCollectionMutation = useMutation({
     mutationFn: ({ name }: z.infer<typeof schema>) => {
       return axios.post("/api/collection/create.collection", { name, icon });
     },
     onSuccess: () => {
+      // Invalidates the query to refresh the data
       queryClient.invalidateQueries({ queryKey: ["collections"] });
       setShowCreateCollection(false);
     },
   });
 
+  // This handles form submission
   const onSubmit: SubmitHandler<z.infer<typeof schema>> = (
     data: z.infer<typeof schema>
   ) => {
+    // Creates the collection
     createCollectionMutation.mutate({ name: data.name });
   };
 
