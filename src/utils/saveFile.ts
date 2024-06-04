@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
 import path from "path";
 
+// Function to convert a base64 data URL to a File object
 const dataURLtoFile = (dataurl: string, filename: string) => {
   var arr = dataurl.split(","),
     mime = arr[0].match(/:(.*?);/)![1],
@@ -18,6 +19,7 @@ const dataURLtoFile = (dataurl: string, filename: string) => {
   return new File([u8arr], filename, { type: mime });
 };
 
+// Function to store a File object in the specified directory
 const storeFile = async (fileName: string, file: File) => {
   const uploadDir = path.join(process.cwd(), "public/files");
 
@@ -32,6 +34,7 @@ const storeFile = async (fileName: string, file: File) => {
   fs.writeFileSync(filePath, Buffer.from(fileContents));
 };
 
+// Function to save a base64 encoded file to the file system
 const saveFile = async (b64File: string): Promise<string> => {
   const type = b64File.split(";")[0].split("/")[1];
 
