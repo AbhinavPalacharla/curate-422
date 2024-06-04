@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: upload.ts: Describes all of the utility functions needed for uploading files to the hard disk for storage as part of the database.
+
 import { HandleUploadBody } from "@vercel/blob/client";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { v4 as uuidv4 } from "uuid";

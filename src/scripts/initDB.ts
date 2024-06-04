@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: initDB.ts: Database initialization script
+
 import { prisma } from "../utils/prisma";
 
 (async () => {

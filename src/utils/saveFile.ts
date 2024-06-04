@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: saveFile.ts: utilities for saving files (same /src/pages/upload.ts)
+
 import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
 import path from "path";

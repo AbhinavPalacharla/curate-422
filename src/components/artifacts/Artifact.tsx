@@ -5,6 +5,7 @@ LAST EDITED: 6-3-2024
 DESCRIPTION: Artifact.tsx: Describes the "artifact" component which contains all media data within our application.
 */
 
+
 import Image from "next/image";
 import Link from "next/link";
 import type { ArtifactMedia } from "@prisma/client";

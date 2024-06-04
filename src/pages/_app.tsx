@@ -4,7 +4,7 @@ AUTHORS: NA, FC, VD, RK, AP
 LAST EDITED: 6-3-2024
 DESCRIPTION: _app.tsx: This is the root of the application and encompasses the client side of the application.
 */
-
+        
 import "@/styles/globals.css";
 
 import type { NextPageWithLayout } from "@/components/layout";

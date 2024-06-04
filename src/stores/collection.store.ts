@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: collections.store.ts: 
+
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { Collection } from "@prisma/client";

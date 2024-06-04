@@ -1,3 +1,7 @@
+/// AUTHORS: AP, VD
+/// LAST EDITED: 6-3-2024
+/// DESCRIPTION: delete.artifact.ts: Describes the handler for the API request to delete a given artifact.
+
 import type { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "@/utils";
 import { handleError } from "@/utils/handleError";
